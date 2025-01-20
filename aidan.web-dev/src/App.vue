@@ -17,10 +17,10 @@
       <landingSection></landingSection>
     </div>
     <div class="section">
-      <ProjectsSection></ProjectsSection>
+      <skillsSection></skillsSection>
     </div>
     <div class="section">
-      <skillsSection></skillsSection>
+      <ProjectsSection></ProjectsSection>
     </div>
     <div class="section">
       <contactSection></contactSection>
@@ -33,7 +33,9 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 9vw;
+    color: black;
     --time:50s;
   }
 
@@ -46,7 +48,16 @@
 
   .section {
     height: 100vh;
+    width: 100%;
     scroll-snap-align: start;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .section {
+      width: 33.33%;
+      justify-self: center;
+      font-size: 4vw;
+    }
   }
 
   .background {
