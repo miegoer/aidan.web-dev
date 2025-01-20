@@ -1,47 +1,108 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+  import landingSection from './components/landingSection.vue'
+  import ProjectsSection from './components/projectsSection.vue'
+  import skillsSection from './components/skillsSection.vue'
+  import contactSection from './components/contactSection.vue'
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+  <div class="background">
+    <div class="sky">
+      <div class="sun"></div>
     </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+    <div class="ocean"></div>
+  </div>
+  <div class="contentContainer">
+    <div class="section">
+      <landingSection></landingSection>
+    </div>
+    <div class="section">
+      <ProjectsSection></ProjectsSection>
+    </div>
+    <div class="section">
+      <skillsSection></skillsSection>
+    </div>
+    <div class="section">
+      <contactSection></contactSection>
+    </div>
+  </div>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-}
+  * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    --time:50s;
+  }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
+  .contentContainer {
+    width: 100vw;
+    height: 100vh; 
+    overflow-y: scroll; 
+    scroll-snap-type: y mandatory; 
+  }
 
-@media (min-width: 1024px) {
-  header {
+  .section {
+    height: 100vh;
+    scroll-snap-align: start;
+  }
+
+  .background {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
     display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+    flex-direction: column;
+    z-index: -1;
   }
 
-  .logo {
-    margin: 0 2rem 0 0;
+  .sky,.ocean {
+    width: 100%;
+    height: 50%;
   }
 
-  header .wrapper {
+  .sky {
+    background-color: #bd4f6c;
+    background-image: radial-gradient(circle at right, #bd4f6c, #d7816a);
+    background-size: 400% 400%;
+    position: relative;
+    -webkit-box-reflect: below 0 linear-gradient(transparent, rgba(0, 0, 0, 0.7));
     display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    overflow: hidden;
+    animation: sky var(--time) ease infinite;
   }
-}
+
+  .ocean {
+    background-color: #a4508b;
+    background-image: radial-gradient(circle at center, #c86dd7 0%, #522343 0%);
+  }
+
+  .sun {
+    width: 15vw;
+    height: 15vw;
+    border-radius: 50%;
+    background-color: #a40606;
+    background-image: linear-gradient(315deg, #a40606 0%, #d98324 74%);
+    transform: translateY(20%);
+    animation: set var(--time) ease infinite;
+    box-shadow: 0 0 210px 100px rgba(253, 142,54,0.6), 0 0 210px 200px rgba(251, 167,98,0.781);
+  }
+
+  @keyframes set{
+    0%,
+    100%{
+      transform: translate(0, 100%);
+    }
+    40% {
+      transform: translate(0, -50%);
+    }
+    60% {
+      transform: translate(0, -50%);
+    }
+  }
 </style>
