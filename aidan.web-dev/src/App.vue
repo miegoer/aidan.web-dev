@@ -54,7 +54,7 @@
 
   @media screen and (min-width: 1024px) {
     .section {
-      width: 33.33%;
+      width: 50%;
       justify-self: center;
       font-size: 4vw;
     }
