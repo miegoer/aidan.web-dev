@@ -34,8 +34,8 @@
     padding: 0;
     margin: 0;
     font-family: 'Work Sans', sans-serif;
-    font-size: 9vw;
-    color: black;
+    font-size: 4vw;
+    color: #171616;
     --time:50s;
   }
 
