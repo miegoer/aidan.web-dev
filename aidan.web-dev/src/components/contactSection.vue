@@ -5,19 +5,18 @@
     <img src="https://cdn.jsdelivr.net/npm/simple-icons@3.13.0/icons/leetcode.svg" href="https://leetcode.com/u/miegoer/">
     <i class="fa fa-envelope" style="font-size:36px" href="mailto:aidanl.webdev@gmail.com"></i>
   </div>
-  <div class="section">
-    <span>How can I</span>
-    <span>get in touch?</span>
+  <div class="halfSection">
+    <h2>How can I<br>get in touch?</h2>
   </div>
   <form id="form" method="POST">
     <input type="hidden" name="access_key" value="d3155001-53a8-47dc-8657-36cdfa92c3a8">
 
     <label for="name">Name:</label>
-    <input type="text" id="name" name="name" required><br>
+    <input type="text" id="name" name="name" required>
     <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required><br>
+    <input type="email" id="email" name="email" required>
     <label for="message">Message:</label>
-    <textarea id="message" name="message" required></textarea><br>
+    <textarea id="message" name="message" required></textarea>
     <button type="submit">Submit</button>
     <div id="result"></div>
   </form>
@@ -69,3 +68,28 @@ export default {
   }
 };
 </script>
+
+<style>
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 10px;
+  }
+
+  form input,
+  form textarea {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin: 0px;
+  }
+
+form textarea {
+  resize: vertical;
+}
+</style>

@@ -1,13 +1,13 @@
 <template>
-  <div class="section" style="justify-content: end;">
+  <div class="halfSection" style="justify-content: end;">
     <div class="animate-wrapper" :ref="setRef">
-      <span>Aidan Lamb</span>
+      <h1>Aidan Lamb</h1>
     </div>
   </div>
-  <div class="section" style="justify-content: start;">
+  <div class="halfSection" style="justify-content: start;">
     <div class="animate-wrapper" :ref="setRef">
-      <span>Software Engineer</span>
-      <span class="smallText">*part-time outdoorsman / <a href="https://www.scouts.org.uk/" target="_blank" style="color: inherit; text-decoration: none; background-color: transparent;">Scout Leader</a></span>
+      <h1>Software Engineer</h1>
+      <h3>*part-time outdoorsman / <a href="https://www.scouts.org.uk/" target="_blank" style="color: inherit; text-decoration: none; background-color: transparent;">Scout Leader</a></h3>
     </div>
   </div>
 </template>
@@ -22,17 +22,7 @@ const { setRef } = useScrollAnimation({
 </script>
 
 <style>
-  .section {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    margin: 0px;
-    width: 100%;
-    height: 50%;
-    white-space: nowrap;
-  }
+
   .animate-wrapper {
   opacity: 0;
   position: relative;
@@ -44,15 +34,6 @@ const { setRef } = useScrollAnimation({
 
   .animate-wrapper.animate {
     animation: riseUp 1s forwards;
-  }
-
-  .smallText {
-    font-size: 2.5vw;
-  }
-  @media screen and (min-width: 1024px) {
-    .smallText {
-      font-size: 1vw;
-    }
   }
   @keyframes riseUp {
     0% {

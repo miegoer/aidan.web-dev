@@ -1,8 +1,55 @@
 <script setup>
-  import landingSection from './components/landingSection.vue'
-  import ProjectsSection from './components/projectsSection.vue'
-  import skillsSection from './components/skillsSection.vue'
-  import contactSection from './components/contactSection.vue'
+import { onMounted, onUnmounted } from 'vue'
+import landingSection from './components/landingSection.vue'
+import ProjectsSection from './components/projectsSection.vue'
+import skillsSection from './components/skillsSection.vue'
+import contactSection from './components/contactSection.vue'
+
+let observer = null;
+
+const handleIntersection = (entries) => {
+  const sun = document.querySelector('.sun');
+  
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) {
+      const computedStyle = window.getComputedStyle(sun);
+      const matrix = computedStyle.transform;
+
+      let currentY = 0;
+      if (matrix !== 'none') {
+        const values = matrix.match(/matrix.*\((.+)\)/)[1].split(', ');
+        currentY = parseFloat(values[5]);
+      }
+
+      sun.style.transform = `translateY(${currentY}px)`;
+
+      sun.style.animation = 'quick-descent 0.3s linear forwards';
+    } else {
+
+      sun.style.animation = '';
+      sun.style.transform = ''; 
+    }
+  });
+};
+
+onMounted(() => {
+  const firstSection = document.querySelector('.contentContainer .section:first-child');
+
+  observer = new IntersectionObserver(handleIntersection, {
+    root: null,
+    threshold: 0.5,
+  });
+
+  if (firstSection) {
+    observer.observe(firstSection);
+  }
+});
+
+onUnmounted(() => {
+  if (observer) {
+    observer.disconnect();
+  }
+});
 </script>
 
 <template>
@@ -16,7 +63,7 @@
     <div class="section">
       <landingSection></landingSection>
     </div>
-    <div class="section">
+    <div class="section" style="justify-content: center; position: relative;">
       <skillsSection></skillsSection>
     </div>
     <div class="section">
@@ -28,15 +75,27 @@
   </div>
 </template>
 
-<style scoped>
+<style>
   * {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
     font-family: 'Work Sans', sans-serif;
-    font-size: 4vw;
+    font-size: 8vw;
     color: #171616;
     --time:50s;
+  }
+
+  h1 {
+    font-size: 8vw;
+  }
+
+  h2 {
+    font-size: 5vw;
+  }
+
+  h3, a, label, button, p, form input, form textarea {
+    font-size: 2.5vw;
   }
 
   .contentContainer {
@@ -47,17 +106,21 @@
   }
 
   .section {
-    height: 100vh;
-    width: 100%;
     scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 0px;
+    width: 100%;
+    height: 100%;
+    white-space: nowrap;
   }
 
-  @media screen and (min-width: 1024px) {
-    .section {
-      width: 50%;
-      justify-self: center;
-      font-size: 4vw;
-    }
+  .halfSection {
+    display: flex;
+    flex-direction: column;
+    height: 50%;
   }
 
   .background {
@@ -85,7 +148,7 @@
     align-items: center;
     justify-content: flex-end;
     overflow: hidden;
-    animation: sky var(--time) ease infinite;
+    animation: sky var(--time) ease;
   }
 
   .ocean {
@@ -104,6 +167,28 @@
     box-shadow: 0 0 210px 100px rgba(253, 142,54,0.6), 0 0 210px 200px rgba(251, 167,98,0.781);
   }
 
+  .sun-fade-enter-active,
+  .sun-fade-leave-active {
+    transition: opacity 0.5s ease;
+  }
+  
+  .sun-fade-enter-from,
+  .sun-fade-leave-to {
+    opacity: 0;
+  }
+
+  @media screen and (min-width: 1024px) {
+    h1 {
+      font-size: 4vw;
+    }
+    h2 {
+      font-size: 2.5vw;
+    }
+    h3, a, label, button, p, form input, form textarea {
+      font-size: 1vw;
+    }
+  }
+
   @keyframes set{
     0%,
     100%{
@@ -115,5 +200,11 @@
     60% {
       transform: translate(0, -50%);
     }
+  }
+
+  @keyframes quick-descent {
+  to {
+    transform: translate(0, 105%);
+  }
   }
 </style>

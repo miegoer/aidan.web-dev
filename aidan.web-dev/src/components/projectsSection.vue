@@ -1,17 +1,15 @@
 <template>
-  <div>
     <!-- Project Container -->
-    <div class="projectContainer">
-      <span @click="showProject('Project1')" class="left">{{projectText.Project1.name}}</span>
-      <span @click="showProject('Project2')" class="right">{{projectText.Project2.name}}</span>
+    <div class="halfSection" style="justify-content: end;">
+      <h2 @click="showProject('Project1')" class="left">{{projectText.Project1.name}}</h2>
+      <h2 @click="showProject('Project2')" class="right">{{projectText.Project2.name}}</h2>
     </div>
-    <div class="section">
-      <span>What have</span>
-      <span>I done?</span>
+    <div class="s" style="justify-content: center; height: 30%;">
+      <h2>What have<br>I done?</h2>
     </div>
-    <div class="projectContainer">
-      <span @click="showProject('Project3')" class="left">{{projectText.Project3.name}}</span>
-      <span @click="showProject('Project4')" class="right">{{projectText.Project4.name}}</span>
+    <div class="halfSection">
+      <h2 @click="showProject('Project3')" class="left">{{projectText.Project3.name}}</h2>
+      <h2 @click="showProject('Project4')" class="right">{{projectText.Project4.name}}</h2>
     </div>
 
     <!-- Popup Overlay -->
@@ -27,7 +25,6 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -113,7 +110,10 @@ export default {
   text-align: center;
   position: relative;
   text-wrap: wrap;
-  font-size: 1vw;
+}
+
+.popup p, .popup p strong {
+  font-size: 2.5vw;
 }
 
 .left {
@@ -132,5 +132,11 @@ export default {
   border: none;
   font-size: 16px;
   cursor: pointer;
+}
+
+@media screen and (min-width: 1024px) {
+  .popup p, .popup p strong {
+    font-size: 1vw;
+  }
 }
 </style>
