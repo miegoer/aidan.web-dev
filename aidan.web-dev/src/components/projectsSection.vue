@@ -1,34 +1,78 @@
 <template>
-    <!-- Project Container -->
-    <div class="halfSection" style="justify-content: end;">
-      <h2 @click="showProject('Project1')" class="left">{{projectText.Project1.name}}</h2>
-      <h2 @click="showProject('Project2')" class="right">{{projectText.Project2.name}}</h2>
-    </div>
-    <div class="s" style="justify-content: center; height: 30%;">
-      <h2>What have<br>I done?</h2>
-    </div>
-    <div class="halfSection">
-      <h2 @click="showProject('Project3')" class="left">{{projectText.Project3.name}}</h2>
-      <h2 @click="showProject('Project4')" class="right">{{projectText.Project4.name}}</h2>
+  <div class="projectsWrapper">
+    <h2>Previous <br>Projects</h2>
+
+    <div class="project-click-overlays">
+      <div 
+        class="project-click-overlay project-1" 
+        @click="showProject('Project1')"
+      ></div>
+      <div 
+        class="project-click-overlay project-2" 
+        @click="showProject('Project2')"
+      ></div>
+      <div 
+        class="project-click-overlay project-3" 
+        @click="showProject('Project3')"
+      ></div>
+      <div 
+        class="project-click-overlay project-4" 
+        @click="showProject('Project4')"
+      ></div>
     </div>
 
-    <!-- Popup Overlay -->
     <div v-if="activeProject" class="overlay">
       <div class="popup">
         <button @click="closeProject" class="close-button">X</button>
         <h2>{{ projectText[activeProject].name }}</h2>
-        <p><strong>Description:</strong> {{ projectText[activeProject].description }}</p>
-        <p><strong>Tech Stack:</strong> {{ projectText[activeProject].stack }}</p>
-        <p><strong>Role:</strong> {{ projectText[activeProject].role }}</p>
+        <p><strong style="font-size: 2.5vw;">Description:</strong> {{ projectText[activeProject].description }}</p>
+        <p><strong style="font-size: 2.5vw;">Tech Stack:</strong> {{ projectText[activeProject].stack }}</p>
+        <p><strong style="font-size: 2.5vw;">Role:</strong> {{ projectText[activeProject].role }}</p>
         <div v-if="projectText[activeProject].media">
           <img :src="projectText[activeProject].media" alt="Project media" class="project-media" />
         </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
+import { onMounted, onUnmounted, ref } from 'vue'
+
 export default {
+  emits: ['show-project'],
+  setup(props, { emit }) {
+    const isVisible = ref(false)
+    let observer = null
+
+    const handleIntersection = (entries) => {
+      entries.forEach(entry => {
+        isVisible.value = entry.isIntersecting
+      })
+    }
+
+    onMounted(() => {
+      observer = new IntersectionObserver(handleIntersection, {
+        root: null,
+        threshold: 0.5,
+      })
+
+      const section = document.querySelector('.section:nth-child(3)')
+      if (section) {
+        observer.observe(section)
+      }
+    })
+
+    onUnmounted(() => {
+      if (observer) {
+        observer.disconnect()
+      }
+    })
+
+    return {
+      isVisible,
+    }
+  },
   data() {
     return {
       activeProject: null,
@@ -62,32 +106,73 @@ export default {
           media: "/public/SouthEastScouts.jpg"
         },
       },
-    };
+    }
   },
   methods: {
-    showProject(project) {
-      this.activeProject = project;
-    },
-    closeProject() {
-      this.activeProject = null;
-    },
+  closeProject() {
+    this.activeProject = null;
   },
-};
+  showProject(project) {
+    this.activeProject = project;
+    this.$emit('show-project', project);
+  },
+},
+}
 </script>
 
-<style>
-.projectContainer {
+<style scoped>
+.projectsWrapper {
+  position: relative;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   width: 100%;
-  height: auto;
-  margin: 10px 0;
+  height: 100%;
+  z-index: 4;
 }
 
-.project-media {
-  max-width: 65%;
+.project-click-overlays {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 3;
 }
 
+.project-click-overlay {
+  position: absolute;
+  width: 15vw;
+  height: 15vw;
+  border-radius: 50%;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.project-1 {
+  top: 10%;
+  left: 25.5%;
+}
+
+.project-2 {
+  top: 10%;
+  right: 24.5%;
+}
+
+.project-3 {
+  bottom: 10%;
+  left: 25.5%;
+}
+
+.project-4 {
+  bottom: 10%;
+  right: 24.5%;
+}
+
+/* Existing popup styles */
 .overlay {
   position: fixed;
   top: 0;
@@ -98,7 +183,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 10;
+  z-index: 11;
 }
 
 .popup {
@@ -112,31 +197,35 @@ export default {
   text-wrap: wrap;
 }
 
-.popup p, .popup p strong {
-  font-size: 2.5vw;
-}
-
-.left {
-  text-align: left;
-}
-
-.right {
-  text-align: right;
-}
-
 .close-button {
   position: absolute;
   top: 10px;
   right: 10px;
   background: none;
   border: none;
-  font-size: 16px;
+  font-size: 24px;
+  padding: 10px;
   cursor: pointer;
+  z-index: 101;
+  pointer-events: auto;
 }
 
-@media screen and (min-width: 1024px) {
-  .popup p, .popup p strong {
-    font-size: 1vw;
+.project-media {
+  max-width: 65%;
+}
+
+.centered-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .project-click-overlay {
+    width: 30vw;
+    height: 30vw;
   }
 }
 </style>
