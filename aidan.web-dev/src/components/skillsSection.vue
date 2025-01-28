@@ -1,6 +1,6 @@
 <template>
   <div class="staticSun">
-    <div class="sun-content">
+    <div class="sun-content-skills">
       <h2>About Me</h2>
       <p>Hi! I'm Aidan Lamb, a Full Stack Software Engineer based in Glasgow, specializing in TypeScript and JavaScript technologies, with hands-on experience in React, Node.js, Next.js, and Express.js. My journey in programming spans over a decade, driven by a genuine passion for technology and problem-solving.</p>
     </div>
@@ -180,12 +180,13 @@ onUnmounted(() => {
   justify-content: center;
   align-items: start;
   text-align: center;
-  padding: 1vw;
+  padding: 2vw;
 }
 
-.sun-content {
+.sun-content-skills {
   width: 80%;
   color: white;
+  text-wrap: wrap;
 }
 
 .sun-content h2 {

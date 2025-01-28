@@ -30,7 +30,6 @@ const handleIntersection = (entries) => {
         const values = matrix.match(/matrix.*\((.+)\)/)[1].split(', ');
         currentY = parseFloat(values[5]);
       }
-
       sun.style.transform = `translateY(${currentY}px)`;
       sun.style.animation = 'quick-descent 0.3s linear forwards';
     } else {
@@ -116,6 +115,17 @@ onMounted(async () => {
   // Initially hide project suns
   const projectSuns = document.querySelectorAll('.projectSuns .sunProjects');
   projectSuns.forEach(sun => sun.classList.add('hidden'));
+
+  const contactSection = document.querySelector('.contact-section');
+  contactObserver = new IntersectionObserver(handleContactIntersection, {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.5,
+  });
+
+  if (contactSection) {
+    contactObserver.observe(contactSection);
+  }
 });
 
 onUnmounted(() => {
@@ -124,6 +134,9 @@ onUnmounted(() => {
   }
   if (projectsObserver) {
     projectsObserver.disconnect();
+  }
+  if (contactObserver) {
+    contactObserver.disconnect();
   }
 });
 </script>
@@ -135,7 +148,6 @@ onUnmounted(() => {
     </div>
     <div class="ocean"></div>
     
-    <!-- Project suns now directly in background div, but positioned absolutely -->
     <div class="projectSuns">
       <div class="sunProjects project1" @click="console.log('Project 1 clicked')">
         <h2>Trail Stops</h2>
@@ -168,7 +180,7 @@ onUnmounted(() => {
       ref="projectsSection"
     ></ProjectsSection>
     </div>
-    <div class="section">
+    <div class="section contact-section">
       <contactSection></contactSection>
     </div>
   </div>
@@ -257,6 +269,11 @@ onUnmounted(() => {
     height: 50%;
   }
 
+  .background, .sky, .ocean {
+  min-height: 0;
+  max-height: none;
+}
+
   .sky {
     background-color: #bd4f6c;
     background-image: radial-gradient(circle at right, #bd4f6c, #d7816a);
@@ -282,9 +299,11 @@ onUnmounted(() => {
     border-radius: 50%;
     background-color: #a40606;
     background-image: linear-gradient(315deg, #a40606 0%, #d98324 74%);
-    transform: translateY(20%);
+    transform: translateY(100%);
     animation: set var(--time) ease infinite;
     box-shadow: 0 0 210px 100px rgba(253, 142,54,0.6), 0 0 210px 200px rgba(251, 167,98,0.781);
+    max-height: 850px;
+    max-width: 850px;
   }
 
   .projectSuns {
@@ -370,6 +389,16 @@ onUnmounted(() => {
   .project-exit-top {
     animation: exit-to-top 0.2s linear forwards;
   }
+
+  .contact-section .sky {
+  -webkit-box-reflect: below 0 linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+}
+
+.sun.contact-size {
+  width: 80vw;
+  height: 80vw;
+  transition: width 0.5s ease-out, height 0.5s ease-out;
+}
 
   @keyframes enter-from-bottom {
     from {
