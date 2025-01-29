@@ -81,16 +81,17 @@ const radius = ref(0)
 const angleStep = 360 / skills.length
 const rotation = ref(0)
 
+
+
 function calculateRadius() {
-  // Calculate radius as the lesser of:
-  // 1. 40% of screen width
-  // 2. Screen height / 2
-  // 3. Hardcoded max of 350px
+  // Calculate responsive width based on 30% of viewport width
+  const responsiveWidth = window.innerWidth * 0.35
+  
+  // Enforce min width of 280px and max width of 800px for the wheel
   radius.value = Math.min(
-    window.innerWidth * 0.3, 
-    window.innerHeight * 0.3, 
-    350
-  )
+    Math.max(250, responsiveWidth),
+    500
+  ) / 2  // Divide by 2 since radius is half the total width
 }
 
 function animate() {
@@ -115,12 +116,14 @@ onUnmounted(() => {
   width: 100%;
   height: 50%;
   overflow: hidden;
+  max-width: 1800px;
 }
 
 .wheel, .wheel-top {
   position: absolute;
   width: 100%;
   height: 800px;
+  max-width: 1800px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -136,14 +139,16 @@ onUnmounted(() => {
 
 .circle {
   position: absolute;
-  width: 500px;
-  height: 400px;
+  width: 100%;
+  height: 100%;
+  max-width: 1700px;
 }
+
 
 .icon-wrapper {
   position: absolute;
-  width: 100px;
-  height: 100px;
+  width: max(60px, 6vw);
+  height: max(60px, 6vw);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -156,18 +161,20 @@ onUnmounted(() => {
 .skill-icon {
   width: 5vw;
   height: auto;
+  min-width: 30px;
+  max-width: 70px;
   object-fit: contain;
   z-index: 3;
 }
 
 .staticSun {
   position: absolute;
-  width: 28vw;
-  height: 28vw;
-  max-width: 440px;
-  max-height: 440px;
-  min-width: 200px;
-  min-height: 200px;
+  width: 30vw;
+  height: 30vw;
+  max-width: 500px;
+  max-height: 500px;
+  min-width: 260px;
+  min-height: 260px;
   border-radius: 50%;
   background-color: #a40606;
   background-image: linear-gradient(315deg, #a40606 0%, #d98324 74%);
@@ -178,9 +185,9 @@ onUnmounted(() => {
   z-index: -1;
   display: flex;
   justify-content: center;
-  align-items: start;
+  align-items: center;
   text-align: center;
-  padding: 2vw;
+  padding: 4vw;
 }
 
 .sun-content-skills {
@@ -190,13 +197,35 @@ onUnmounted(() => {
 }
 
 .sun-content-skills h2 {
-  font-size: 30%;
+  font-size: 15px;
   margin-bottom: 1vw;
 }
 
 .sun-content-skills p {
-  font-size: 11.5%;
+  font-size: 10px;
   line-height: 1.5;
   text-wrap: wrap;
 }
+
+@media only screen and (min-width: 850px) {
+  .sun-content-skills h2 {
+    font-size: 2vw;
+  }
+  .sun-content-skills p {
+    font-size: 1.2vw;
+  }
+  .staticSun {
+    padding: 2vw;
+  }
+}
+
+@media only screen and (min-width: 1700px) {
+  .sun-content-skills h2 {
+    font-size: 28.86px;
+  }
+  .sun-content-skills p {
+    font-size: 20.412px;
+  }
+}
+
 </style>
