@@ -23,11 +23,13 @@
 
     <div v-if="activeProject" class="overlay">
       <div class="popup">
-        <button @click="closeProject" class="close-button">X</button>
+        <button @click="closeProject" class="close-button">
+          <span class="material-symbols-outlined">close</span>
+        </button>
         <h2>{{ projectText[activeProject].name }}</h2>
-        <p><strong style="font-size: 2.5vw;">Description:</strong> {{ projectText[activeProject].description }}</p>
-        <p><strong style="font-size: 2.5vw;">Tech Stack:</strong> {{ projectText[activeProject].stack }}</p>
-        <p><strong style="font-size: 2.5vw;">Role:</strong> {{ projectText[activeProject].role }}</p>
+        <p><strong style="font-weight: bold;">Description:</strong> {{ projectText[activeProject].description }}</p>
+        <p><strong style="font-weight: bold;">Tech Stack:</strong> {{ projectText[activeProject].stack }}</p>
+        <p><strong style="font-weight: bold;">Role:</strong> {{ projectText[activeProject].role }}</p>
         <div v-if="projectText[activeProject].media">
           <img :src="projectText[activeProject].media" alt="Project media" class="project-media" />
         </div>
@@ -87,9 +89,9 @@ export default {
         Project2: {
           name: "aidan.web-dev",
           description: "My personal portfolio site. A place to show off my skills and act as a point of contact to get in touch with me.",
-          stack: "Vue.js, Bootstrap",
+          stack: "Vue.js",
           role: "Sole developer for entire project.",
-          media: ""
+          media: "/public/aidanWebDevSite.PNG"
         },
         Project3: {
           name: "UrGig",
@@ -145,31 +147,31 @@ export default {
 
 .project-click-overlay {
   position: absolute;
-  width: 15vw;
-  height: 15vw;
+  width: 25vw;
+  height: 25vw;
   border-radius: 50%;
   pointer-events: auto;
   cursor: pointer;
 }
 
 .project-1 {
-  top: 10%;
-  left: 25.5%;
+  top: 20%;
+  left: 15%;
 }
 
 .project-2 {
-  top: 10%;
-  right: 24.5%;
+  top: 20%;
+  right: 15%;
 }
 
 .project-3 {
-  bottom: 10%;
-  left: 25.5%;
+  bottom: 20%;
+  left: 15%;
 }
 
 .project-4 {
-  bottom: 10%;
-  right: 24.5%;
+  bottom: 20%;
+  right: 15%;
 }
 
 /* Existing popup styles */
@@ -187,7 +189,8 @@ export default {
 }
 
 .popup {
-  background: white;
+  background-color: #bd4f6c;
+  background-image: radial-gradient(circle at right, #bd4f6c, #d7816a);
   padding: 20px;
   border-radius: 8px;
   width: 80%;
@@ -208,10 +211,24 @@ export default {
   cursor: pointer;
   z-index: 101;
   pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-button .material-symbols-outlined {
+  font-size: 24px;
+  color: black;
+  transition: color 0.2s ease;
+}
+
+.close-button:hover .material-symbols-outlined {
+  color: #666;
 }
 
 .project-media {
-  max-width: 65%;
+  margin-top: 10px;
+  max-width: 90%;
 }
 
 .centered-header {
@@ -220,6 +237,33 @@ export default {
   align-items: center;
   text-align: center;
   width: 100%;
+}
+
+
+@media screen and (min-width: 1024px) {
+  .project-click-overlay {
+    width: 15vw;
+    height: 15vw;
+  }
+
+  .project-1, .project-3 {
+    left: 25%;
+  }
+
+  .project-2, .project-4 {
+    right: 25%;
+  }
+
+  .project-1, .project-2 {
+    top: 10%;
+  }
+
+  .project-3, .project-4 {
+    bottom: 10%;
+  }
+  .project-media {
+    max-width: 65%;
+  }
 }
 
 @media screen and (max-width: 768px) {

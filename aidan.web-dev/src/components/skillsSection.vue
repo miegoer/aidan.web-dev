@@ -189,13 +189,13 @@ onUnmounted(() => {
   text-wrap: wrap;
 }
 
-.sun-content h2 {
-  font-size: 2.5;
+.sun-content-skills h2 {
+  font-size: 30%;
   margin-bottom: 1vw;
 }
 
-.sun-content p {
-  font-size: 1vw;
+.sun-content-skills p {
+  font-size: 11.5%;
   line-height: 1.5;
   text-wrap: wrap;
 }

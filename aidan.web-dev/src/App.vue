@@ -205,7 +205,7 @@ onUnmounted(() => {
     font-size: 5vw;
   }
 
-  h3, a, label, button, p, form input, form textarea {
+  h3, a, label, button, p, form input, form textarea, strong {
     font-size: 2.5vw;
   }
 
@@ -318,8 +318,8 @@ onUnmounted(() => {
 
   .projectSuns .sunProjects {
     position: absolute;
-    width: 15vw;
-    height: 15vw;
+    width: 25vw;
+    height: 25vw;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -329,6 +329,7 @@ onUnmounted(() => {
     -webkit-box-reflect: revert;
     cursor: pointer;
     z-index: 5;
+    box-shadow: 0 0 50px 50px rgba(253, 142,54,0.6), 0 0 50px 50px rgba(251, 167,98,0.781);
   }
 
   .projectSuns .sunProjects.hidden {
@@ -337,40 +338,47 @@ onUnmounted(() => {
   }
 
   .project1 {
-    top: 10%;
-    left: 25%;
+    top: 20%;
+    left: 15%;
     background-color: #a40606;
     background-image: linear-gradient(135deg, #a40606 0%, #d98324 74%);
   }
 
   .project2 {
-    top: 10%;
-    right: 25%;
+    top: 20%;
+    right: 15%;
     background-color: #a40606;
     background-image: linear-gradient(225deg, #a40606 0%, #d98324 74%);
   }
 
   .project3 {
-    bottom: 10%;
-    left: 25%;
-    background-color: #a40606;
-    background-image: linear-gradient(45deg, #a40606 0%, #d98324 74%);
-    opacity: 0.7;
-  }
+  bottom: 20%;
+  left: 15%;
+  background-color: rgba(164, 6, 6, 0.5);
+  background-image: linear-gradient(
+    45deg,
+    rgba(164, 6, 6, 0.5) 0%,
+    rgba(217, 131, 36, 0.5) 74%
+  );
+  box-shadow: 0 0 50px 50px rgba(253, 142, 54, 0.3), 0 0 50px 50px rgba(251, 167, 98, 0.39);
+}
 
-  .project4 {
-    bottom: 10%;
-    right: 25%;
-    background-color: #a40606;
-    background-image: linear-gradient(315deg, #a40606 0%, #d98324 74%);
-    opacity: 0.7;
-  }
+.project4 {
+  bottom: 20%;
+  right: 15%;
+  background-color: rgba(164, 6, 6, 0.5);
+  background-image: linear-gradient(
+    315deg,
+    rgba(164, 6, 6, 0.5) 0%,
+    rgba(217, 131, 36, 0.5) 74%
+  );
+  box-shadow: 0 0 50px 50px rgba(253, 142, 54, 0.3), 0 0 50px 50px rgba(251, 167, 98, 0.39);
+}
 
   .projectSuns h2 {
-    color: white;
+    color: #171616;
     text-align: center;
-    font-size: 1.2vw;
-    opacity: 0.7;
+    font-size: 3vw;
   }
 
   /* Project Sun Animation Classes */
@@ -451,8 +459,32 @@ onUnmounted(() => {
     h2 {
       font-size: 2.5vw;
     }
-    h3, a, label, button, p, form input, form textarea {
+    h3, a, label, button, p, form input, form textarea, strong {
       font-size: 1vw;
+    }
+    .projectSuns .sunProjects {
+      width: 15vw;
+      height: 15vw;
+    }
+
+    .project1, .project3 {
+      left: 25%;
+    }
+
+    .project2, .project4 {
+      right: 25%;
+    }
+
+    .project1, .project2 {
+      top: 10%;
+    }
+
+    .project3, .project4 {
+      bottom: 10%;
+    }
+
+    .projectSuns h2 {
+      font-size: 1.5vw;
     }
   }
 
