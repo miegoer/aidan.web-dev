@@ -7,7 +7,7 @@
   <div class="halfSection" style="justify-content: start;">
     <div class="animate-wrapper" :ref="setRef">
       <h1>Software Engineer</h1>
-      <h3>*part-time outdoorsman / <a href="https://www.scouts.org.uk/" target="_blank" style="color: inherit; text-decoration: none; background-color: transparent;">Scout Leader</a></h3>
+      <h3>*part-time outdoorsman / <a href="https://www.scouts.org.uk/" target="_blank" style="color: inherit; text-decoration: none; background-color: transparent;"><h3>Scout Leader</h3></a></h3>
     </div>
   </div>
 </template>

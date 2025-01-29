@@ -211,6 +211,7 @@ onUnmounted(() => {
 
   .projects-section {
     z-index: 2;
+    min-height: 1190;
   }
 
   .projectSuns-container {
@@ -296,14 +297,14 @@ onUnmounted(() => {
   .sun {
     width: 15vw;
     height: 15vw;
+    max-width: 240px;
+    max-height: 240px;
     border-radius: 50%;
     background-color: #a40606;
     background-image: linear-gradient(315deg, #a40606 0%, #d98324 74%);
     transform: translateY(100%);
     animation: set var(--time) ease infinite;
     box-shadow: 0 0 210px 100px rgba(253, 142,54,0.6), 0 0 210px 200px rgba(251, 167,98,0.781);
-    max-height: 850px;
-    max-width: 850px;
   }
 
   .projectSuns {
@@ -452,7 +453,7 @@ onUnmounted(() => {
     }
   }
 
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 1024px) and (max-width: 1600px) {
     h1 {
       font-size: 4vw;
     }
@@ -485,6 +486,40 @@ onUnmounted(() => {
 
     .projectSuns h2 {
       font-size: 1.5vw;
+    }
+  }
+
+  @media screen and (min-width: 1600px) {
+    h1 {
+      font-size: 64px;
+    }
+    h2 {
+      font-size: 40px;
+    }
+    h3, a, label, button, p, form input, form textarea, strong {
+      font-size: 16px;
+    }
+    .projectSuns h2 {
+      font-size: 32px;
+    }
+    .projectSuns .sunProjects {
+      width: 240px;
+      height: 240px;
+    }
+    .project1, .project3 {
+      left: 25%;
+    }
+
+    .project2, .project4 {
+      right: 25%;
+    }
+
+    .project1, .project2 {
+      top: 10%;
+    }
+
+    .project3, .project4 {
+      bottom: 10%;
     }
   }
 

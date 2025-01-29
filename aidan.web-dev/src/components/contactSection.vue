@@ -273,7 +273,7 @@ export default {
   margin-left: 20px;
   align-self: flex-start;
   padding: 10px 20px;
-  background: #3498db;
+  background: #a4508b;
   color: white;
   border: none;
   border-radius: 4px;
@@ -282,7 +282,7 @@ export default {
 }
 
 .form-row button[type="submit"]:hover {
-  background: #2980b9;
+  background: #c065a5;
 }
 
 .form-heading {
@@ -290,19 +290,43 @@ export default {
   margin-top: 20px;
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (max-width: 375px) {
   .iconSection img, 
   .iconSection i {
-    width: 2.5vw;
+    width: 26px;
     height: auto;
     cursor: pointer;
-    font-size: 2.5vw;
+    font-size: 26px;
   }
   .form-heading {
-    font-size: 2vw;
+    font-size: 19px;
   }
   .header-section h2 {
+    font-size: 19px;
   margin-bottom: 50px;
+  }
+  .iconSection {
+  gap: 30px;
+  }
 }
+
+@media screen and (min-width: 800px) {
+  .iconSection img, 
+  .iconSection i {
+    width: 40px;
+    height: auto;
+    cursor: pointer;
+    font-size: 40px;
+  }
+  .form-heading {
+    font-size: 32px;
+  }
+  .header-section h2 {
+    font-size: 50px;
+  margin-bottom: 50px;
+  }
+  .iconSection {
+  gap: 60px;
+  }
 }
 </style>
