@@ -5,14 +5,15 @@
         <div class="contact-sun">
           <div class="sun-content">
             <div class="header-section">
-              <h2>How can I<br>get in touch?</h2>
+              <h2>Where can I<br>find you?</h2>
               <div class="iconSection">
                 <a target="_blank" href="https://www.linkedin.com/in/aidanlamb/" style="background-color: inherit;"><img src="https://cdn.jsdelivr.net/npm/simple-icons@3.13.0/icons/linkedin.svg"/></a>
+                <a target="_blank" href="mailto:aidanl.webdev@gmail.com" style="background-color: inherit;"><i class="fa fa-envelope"></i></a>
                 <a target="_blank" href="https://github.com/miegoer" style="background-color: inherit;"><img src="https://cdn.jsdelivr.net/npm/simple-icons@3.13.0/icons/github.svg"/></a>
                 <a target="_blank" href="https://leetcode.com/u/miegoer/" style="background-color: inherit;"><img src="https://cdn.jsdelivr.net/npm/simple-icons@3.13.0/icons/leetcode.svg"></a>
-                <a target="_blank" href="mailto:aidanl.webdev@gmail.com" style="background-color: inherit;"><i class="fa fa-envelope" style="font-size:36px"></i></a>
               </div>
             </div>
+            <h2 class="form-heading">Get in Touch</h2>
             <form id="form" method="POST" className="styled-form">
               <input type="hidden" name="access_key" value="d3155001-53a8-47dc-8657-36cdfa92c3a8" />
               
@@ -156,7 +157,7 @@ export default {
 }
 
 .header-section h2 {
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 }
 
 .iconSection {
@@ -168,9 +169,10 @@ export default {
 
 .iconSection img, 
 .iconSection i {
-  width: 24px;
-  height: 24px;
+  width: 7vw;
+  height: auto;
   cursor: pointer;
+  font-size: 7vw;
 }
 
 .styled-form {
@@ -245,10 +247,14 @@ export default {
 }
 
 .input-data input:focus ~ label,
-.input-data input:valid ~ label,
+.input-data input:valid ~ label {
+  transform: translateY(-20px);
+  font-size: 14px;
+}
+
 .input-data textarea:focus ~ label,
 .input-data textarea:valid ~ label {
-  transform: translateY(-20px);
+  transform: translateY(-60px);
   font-size: 14px;
 }
 
@@ -277,5 +283,26 @@ export default {
 
 .form-row button[type="submit"]:hover {
   background: #2980b9;
+}
+
+.form-heading {
+  font-size: 5vw;
+  margin-top: 20px;
+}
+
+@media screen and (min-width: 1024px) {
+  .iconSection img, 
+  .iconSection i {
+    width: 2.5vw;
+    height: auto;
+    cursor: pointer;
+    font-size: 2.5vw;
+  }
+  .form-heading {
+    font-size: 2vw;
+  }
+  .header-section h2 {
+  margin-bottom: 50px;
+}
 }
 </style>
