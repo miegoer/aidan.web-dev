@@ -16,4 +16,12 @@ export default defineConfig({
     },
   },
   base: '/aidan.web-dev/',
+  build: {
+    minify: 'esbuild',
+    rollupOptions: {
+      output: {
+        manualChunks: undefined,
+      },
+    },
+  },
 })
