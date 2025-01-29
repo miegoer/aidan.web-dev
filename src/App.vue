@@ -5,14 +5,6 @@ import ProjectsSection from './components/projectsSection.vue'
 import skillsSection from './components/skillsSection.vue'
 import contactSection from './components/contactSection.vue'
 
-const projectsSection = ref(null)
-
-const handleProjectClick = (projectId) => {
-  if (projectsSection.value) {
-    projectsSection.value.showProject(projectId)
-  }
-}
-
 let mainObserver = null;
 let projectsObserver = null;
 const isInitialLoad = ref(true);
@@ -116,16 +108,6 @@ onMounted(async () => {
   const projectSuns = document.querySelectorAll('.projectSuns .sunProjects');
   projectSuns.forEach(sun => sun.classList.add('hidden'));
 
-  const contactSection = document.querySelector('.contact-section');
-  contactObserver = new IntersectionObserver(handleContactIntersection, {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.5,
-  });
-
-  if (contactSection) {
-    contactObserver.observe(contactSection);
-  }
 });
 
 onUnmounted(() => {
@@ -149,18 +131,18 @@ onUnmounted(() => {
     <div class="ocean"></div>
     
     <div class="projectSuns">
-      <div class="sunProjects project1" @click="console.log('Project 1 clicked')">
+      <div class="sunProjects project1">
         <h2>Trail Stops</h2>
       </div>
-      <div class="sunProjects project2" @click="() => handleProjectClick('Project2')">
+      <div class="sunProjects project2">
         <h2>aidan.web-dev</h2>
       </div>
 
       <div class="projectSuns ocean-projects">
-        <div class="sunProjects project3" @click="() => handleProjectClick('Project3')">
+        <div class="sunProjects project3">
           <h2>UrGig</h2>
         </div>
-        <div class="sunProjects project4" @click="() => handleProjectClick('Project4')">
+        <div class="sunProjects project4">
           <h2>Scout Bingo</h2>
         </div>
       </div>
