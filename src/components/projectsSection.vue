@@ -98,7 +98,7 @@ export default {
           description: "Urgig is an online platform focused on connecting artists and promoters. With promoters able to create events and find talent, and artists able to manage their bookings, Urgig is there to simplify the events industry.",
           stack: "Next.js, MongoDB Atlas, Tailwind, TalkJS, Clerk",
           role: "Responsible for the implementation of the messenger service with TalkJS, and booking functionality",
-          media: "/aidan.web-dev/UrGigGIF.gif"
+          media: "/aidan.web-dev/UrgigGIF.gif"
         },
         Project4: {
           name: "Scout Bingo",
@@ -116,7 +116,6 @@ export default {
   },
   showProject(project) {
     this.activeProject = project;
-    this.$emit('show-project', project);
   },
 },
 }
