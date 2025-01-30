@@ -7,16 +7,13 @@
   </div>
   <div class="wheel-container">
     <div class="wheel-top">
-      <div 
-        class="circle" 
-        :style="{ transform: `rotate(${rotation}deg)` }"
-      >
+      <div class="circle rotating">
         <div 
           v-for="(skill, index) in skills" 
           :key="skill.name"
           class="icon-wrapper"
           :style="{ 
-            transform: `rotate(${index * angleStep}deg) translateX(${radius}px)` 
+            transform: `rotate(${index * angleStep}deg) translateX(${translateDistance}px)` 
           }"
         >
           <img 
@@ -30,16 +27,13 @@
   </div>
   <div class="wheel-container">
     <div class="wheel">
-      <div 
-        class="circle" 
-        :style="{ transform: `rotate(${rotation}deg)` }"
-      >
+      <div class="circle rotating">
         <div 
           v-for="(skill, index) in backendSkills" 
           :key="skill.name"
           class="icon-wrapper"
           :style="{ 
-            transform: `rotate(${index * angleStep}deg) translateX(${radius}px)` 
+            transform: `rotate(${index * angleStep}deg) translateX(${translateDistance}px)` 
           }"
         >
           <img 
@@ -54,7 +48,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 
 const skills = [
   { name: "JavaScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
@@ -66,6 +60,7 @@ const skills = [
   { name: "Bootstrap", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" },
   { name: "HTML/CSS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" }
 ]
+
 const backendSkills = [
   { name: "Node.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
   { name: "Express.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" },
@@ -78,35 +73,41 @@ const backendSkills = [
 ]
 
 const radius = ref(0)
+const windowWidth = ref(window.innerWidth)
 const angleStep = 360 / skills.length
-const rotation = ref(0)
 
+const translateDistance = computed(() => {
+  if (windowWidth.value < 800) {
+    return 150 // Minimum distance in pixels for small screens
+  }
+  else if (windowWidth.value > 1700) {
+    return 300 // Maximum distance in pixels for large screens
+  }
+  else {
+    return windowWidth.value * 0.2 // 20vw converted to pixels for medium screens
+  }
+})
 
+function updateWindowWidth() {
+  windowWidth.value = window.innerWidth
+  calculateRadius()
+}
 
 function calculateRadius() {
-  // Calculate responsive width based on 30% of viewport width
   const responsiveWidth = window.innerWidth * 0.35
-  
-  // Enforce min width of 280px and max width of 800px for the wheel
   radius.value = Math.min(
     Math.max(250, responsiveWidth),
     500
-  ) / 2  // Divide by 2 since radius is half the total width
-}
-
-function animate() {
-  rotation.value += 0.5
-  requestAnimationFrame(animate)
+  ) / 2
 }
 
 onMounted(() => {
-  calculateRadius()
-  window.addEventListener('resize', calculateRadius)
-  animate()
+  updateWindowWidth()
+  window.addEventListener('resize', updateWindowWidth)
 })
 
 onUnmounted(() => {
-  window.removeEventListener('resize', calculateRadius)
+  window.removeEventListener('resize', updateWindowWidth)
 })
 </script>
 
@@ -143,7 +144,6 @@ onUnmounted(() => {
   height: 100%;
   max-width: 1700px;
 }
-
 
 .icon-wrapper {
   position: absolute;
@@ -207,6 +207,20 @@ onUnmounted(() => {
   text-wrap: wrap;
 }
 
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rotating {
+  animation: rotate 20s linear infinite;
+  will-change: transform;
+}
+
 @media only screen and (min-width: 850px) {
   .sun-content-skills h2 {
     font-size: 2vw;
@@ -227,5 +241,4 @@ onUnmounted(() => {
     font-size: 20.412px;
   }
 }
-
 </style>
