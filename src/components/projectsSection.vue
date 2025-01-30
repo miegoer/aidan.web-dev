@@ -93,28 +93,28 @@ export default {
           description: "Trail Stops is an outdoor focused website, helping hikers plan their next big trip. Place stops to find nearby accommodation and see how far you'll walk each day.",
           stack: "React, Express, MongoDB, Leaflet Maps, Google Places API",
           role: "Sole developer for entire project.",
-          media: "/aidan.web-dev/TrailStops.gif"
+          media: "/TrailStops.gif"
         },
         Project2: {
           name: "aidan.web-dev",
           description: "My personal portfolio site. A place to show off my skills and act as a point of contact to get in touch with me.",
           stack: "Vue.js",
           role: "Sole developer for entire project.",
-          media: "/aidan.web-dev/aidanWebDevSite.PNG"
+          media: "/aidanWebDevSite.PNG"
         },
         Project3: {
           name: "UrGig",
           description: "Urgig is an online platform focused on connecting artists and promoters. With promoters able to create events and find talent, and artists able to manage their bookings, Urgig is there to simplify the events industry.",
           stack: "Next.js, MongoDB Atlas, Tailwind, TalkJS, Clerk",
           role: "Responsible for the implementation of the messenger service with TalkJS, and booking functionality",
-          media: "/aidan.web-dev/rgigGIF.gif"
+          media: "/UrgigGIF.gif"
         },
         Project4: {
           name: "Scout Bingo",
           description: "An internal bingo game for an upcoming international camp ran by the South East Scout Network.",
           stack: "Vue.js, Express, MongoDB, Cloudinary",
           role: "Sole developer for entire project.",
-          media: "/aidan.web-dev/SouthEastScouts.jpg"
+          media: "/SouthEastScouts.jpg"
         },
       },
     }
