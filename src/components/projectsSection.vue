@@ -30,8 +30,15 @@
         <p><strong style="font-weight: bold;">Description:</strong> {{ projectText[activeProject].description }}</p>
         <p><strong style="font-weight: bold;">Tech Stack:</strong> {{ projectText[activeProject].stack }}</p>
         <p><strong style="font-weight: bold;">Role:</strong> {{ projectText[activeProject].role }}</p>
-        <div v-if="projectText[activeProject].media">
-          <img :src="projectText[activeProject].media" alt="Project media" class="project-media" />
+        <div v-if="projectText[activeProject].media" class="media-container">
+          <div v-if="!imageLoaded[activeProject]" class="media-placeholder"></div>
+          <img 
+            :src="projectText[activeProject].media" 
+            alt="Project media" 
+            class="project-media" 
+            :class="{ 'hidden': !imageLoaded[activeProject] }"
+            @load="handleImageLoad(activeProject)"
+          />
         </div>
       </div>
     </div>
@@ -45,6 +52,7 @@ export default {
   emits: ['show-project'],
   setup(props, { emit }) {
     const isVisible = ref(false)
+    const imageLoaded = ref({})
     let observer = null
 
     const handleIntersection = (entries) => {
@@ -73,6 +81,7 @@ export default {
 
     return {
       isVisible,
+      imageLoaded,
     }
   },
   data() {
@@ -98,7 +107,7 @@ export default {
           description: "Urgig is an online platform focused on connecting artists and promoters. With promoters able to create events and find talent, and artists able to manage their bookings, Urgig is there to simplify the events industry.",
           stack: "Next.js, MongoDB Atlas, Tailwind, TalkJS, Clerk",
           role: "Responsible for the implementation of the messenger service with TalkJS, and booking functionality",
-          media: "/aidan.web-dev/UrgigGIF.gif"
+          media: "/aidan.web-dev/rgigGIF.gif"
         },
         Project4: {
           name: "Scout Bingo",
@@ -111,13 +120,17 @@ export default {
     }
   },
   methods: {
-  closeProject() {
-    this.activeProject = null;
+    closeProject() {
+      this.activeProject = null;
+    },
+    showProject(project) {
+      this.activeProject = project;
+      this.imageLoaded[project] = false;
+    },
+    handleImageLoad(project) {
+      this.imageLoaded[project] = true;
+    },
   },
-  showProject(project) {
-    this.activeProject = project;
-  },
-},
 }
 </script>
 
@@ -173,7 +186,6 @@ export default {
   right: 15%;
 }
 
-/* Existing popup styles */
 .overlay {
   position: fixed;
   top: 0;
@@ -225,9 +237,33 @@ export default {
   color: #666;
 }
 
+.media-container {
+  position: relative;
+  width: 100%;
+  margin-top: 20px;
+  min-height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.media-placeholder {
+  width: 90%;
+  height: 300px;
+  background-color: #a40606;
+  background-image: linear-gradient(315deg, #a40606 0%, #d98324 74%);
+  border-radius: 12px;
+  animation: pulse 1s infinite ease-in-out;
+}
+
 .project-media {
-  margin-top: 10px;
   max-width: 90%;
+  border-radius: 12px;
+  transition: opacity 0.3s ease;
+}
+
+.project-media.hidden {
+  display: none;
 }
 
 .centered-header {
@@ -238,6 +274,17 @@ export default {
   width: 100%;
 }
 
+@keyframes pulse {
+  0% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0.2;
+  }
+}
 
 @media screen and (min-width: 1024px) {
   .project-click-overlay {
@@ -260,8 +307,14 @@ export default {
   .project-3, .project-4 {
     bottom: 10%;
   }
+
   .project-media {
     max-width: 65%;
+  }
+
+  .media-placeholder {
+    width: 65%;
+    height: 200px;
   }
 }
 
@@ -269,6 +322,10 @@ export default {
   .project-click-overlay {
     width: 30vw;
     height: 30vw;
+  }
+
+  .media-placeholder {
+    height: 200px;
   }
 }
 </style>

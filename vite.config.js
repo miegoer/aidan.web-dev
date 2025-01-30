@@ -17,7 +17,7 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
   },
-  base: '/aidan.web-dev/',
+  base: '/',
   build: {
     minify: 'esbuild',
     rollupOptions: {
