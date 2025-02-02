@@ -104,6 +104,7 @@ export default {
   display: flex;
   flex-direction: column;
   position: relative;
+  overflow: hidden;
 }
 
 .form-section {
@@ -125,11 +126,11 @@ export default {
 .contact-sun {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: flex-start;
   width: 80vw;
   max-width: 850px;
   min-width: 300px;
-  max-height: 90vh;
+  height: clamp(400px, 90vh, 90vh);
   position: absolute;
   bottom: 0;
   left: 50%;
@@ -138,7 +139,13 @@ export default {
   background-image: linear-gradient(315deg, #a40606 0%, #d98324 74%);
   border-radius: 80vw 80vw 0 0;
   box-shadow: 0 0 105px 50px rgba(253, 142,54,0.6), 0 0 105px 100px rgba(251, 167,98,0.781);
-  padding-top: 150px;
+  overflow: hidden;
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+
+.sun-content::-webkit-scrollbar {
+  display: none;
 }
 
 .sun-content {
@@ -147,53 +154,56 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 2rem;
+  padding: 2vh 5% 5vh;
+  overflow-y: auto;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;
 }
 
 .header-section {
   width: 100%;
   text-align: center;
-  margin-top: -150px;
+  margin-bottom: 2vh;
 }
 
 .header-section h2 {
-  margin-bottom: 20px;
+  margin-bottom: clamp(10px, 2vh, 20px);
+  font-size: clamp(19px, 5vw, 50px);
+  line-height: 1.2;
 }
 
 .iconSection {
   display: flex;
-  gap: 1rem;
+  gap: clamp(30px, 4vw, 60px);
   justify-content: center;
-  margin-bottom: 5%;
+  margin-bottom: 2vh;
 }
 
 .iconSection img, 
 .iconSection i {
-  width: 7vw;
+  width: clamp(26px, 4vw, 40px);
   height: auto;
   cursor: pointer;
-  font-size: 7vw;
+  font-size: clamp(26px, 4vw, 40px);
+  color: black;
 }
 
 .styled-form {
   width: 100%;
-  padding-bottom: 5%;
-  padding-left: 5%;
-  padding-right: 5%;
-  border-radius: 8px;
-  margin-top: 2%;
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
 }
 
 .form-row {
   display: flex;
   flex-direction: column;
-  margin: 32px 0;
+  margin: 0;
 }
 
 .input-data {
-  width: 90%;
-  height: 40px;
-  margin: 0 20px;
+  width: 100%;
+  height: clamp(30px, 5vh, 40px);
   position: relative;
   text-align: left;
 }
@@ -204,7 +214,7 @@ export default {
   width: 100%;
   height: 100%;
   border: none;
-  font-size: 17px;
+  font-size: clamp(14px, 2vh, 17px);
   border-bottom: 2px solid rgba(0,0,0, 0.12);
   background: none;
   outline: none;
@@ -214,12 +224,44 @@ export default {
   position: absolute;
   pointer-events: none;
   bottom: 10px;
-  font-size: 16px;
+  font-size: clamp(14px, 1.8vh, 16px);
   left: 0;
   transition: all 0.3s ease;
   color: rgba(0, 0, 0, 0.8);
 }
 
+.input-data.textarea {
+  height: clamp(60px, 10vh, 70px);
+}
+
+.input-data textarea {
+  resize: none;
+  height: 100%;
+  padding-top: 10px;
+}
+
+.form-heading {
+  font-size: clamp(19px, 4vw, 32px);
+  margin-bottom: 2vh;
+}
+
+.form-row button[type="submit"] {
+  margin-top: 2vh;
+  padding: clamp(8px, 1.5vh, 10px) clamp(16px, 2vw, 20px);
+  background: #a4508b;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  font-size: clamp(14px, 1.8vh, 16px);
+}
+
+.form-row button[type="submit"]:hover {
+  background: #c065a5;
+}
+
+/* Rest of your existing styles for underline effects remain the same */
 .input-data .underline {
   position: absolute;
   bottom: 0;
@@ -249,84 +291,12 @@ export default {
 .input-data input:focus ~ label,
 .input-data input:valid ~ label {
   transform: translateY(-20px);
-  font-size: 14px;
+  font-size: clamp(12px, 1.6vh, 14px);
 }
 
 .input-data textarea:focus ~ label,
 .input-data textarea:valid ~ label {
-  transform: translateY(-60px);
-  font-size: 14px;
-}
-
-.input-data.textarea {
-  height: auto;
-}
-
-.input-data textarea {
-  resize: none;
-  height: 70px;
-  padding-top: 10px;
-}
-
-.form-row button[type="submit"] {
-  margin-top: 20px;
-  margin-left: 20px;
-  align-self: flex-start;
-  padding: 10px 20px;
-  background: #a4508b;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.form-row button[type="submit"]:hover {
-  background: #c065a5;
-}
-
-.form-heading {
-  font-size: 5vw;
-  margin-top: 20px;
-}
-
-@media screen and (max-width: 375px) {
-  .iconSection img, 
-  .iconSection i {
-    width: 26px;
-    height: auto;
-    cursor: pointer;
-    font-size: 26px;
-  }
-  .form-heading {
-    font-size: 19px;
-  }
-  .header-section h2 {
-    font-size: 19px;
-  margin-bottom: 50px;
-  }
-  .iconSection {
-  gap: 30px;
-  }
-}
-
-@media screen and (min-width: 800px) {
-  .iconSection img, 
-  .iconSection i {
-    width: 40px;
-    height: auto;
-    cursor: pointer;
-    font-size: 40px;
-  }
-  .form-heading {
-    font-size: 32px;
-  }
-  .header-section h2 {
-    font-size: 50px;
-  margin-bottom: 50px;
-  }
-  .iconSection {
-  gap: 60px;
-  }
+  transform: translateY(-20px);
+  font-size: clamp(12px, 1.6vh, 14px);
 }
 </style>
