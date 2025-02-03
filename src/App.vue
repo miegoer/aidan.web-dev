@@ -135,7 +135,7 @@ onUnmounted(() => {
         <h2>Trail Stops</h2>
       </div>
       <div class="sunProjects project2">
-        <h2>aidan.web-dev</h2>
+        <h2>AidanWebDev</h2>
       </div>
 
       <div class="projectSuns ocean-projects">
@@ -173,10 +173,19 @@ onUnmounted(() => {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+    --time:50s;
+  }
+
+  p {
     font-family: 'Work Sans', sans-serif;
     font-size: 8vw;
     color: #171616;
-    --time:50s;
+  }
+
+  h1, h2, h3 {
+    font-family: "Open Sans", serif;
+    font-weight: 700;
+    color: #171616;
   }
 
   h1 {

@@ -96,7 +96,7 @@ export default {
           media: "/TrailStops.gif"
         },
         Project2: {
-          name: "aidan.web-dev",
+          name: "AidanWebDev",
           description: "My personal portfolio site. A place to show off my skills and act as a point of contact to get in touch with me.",
           stack: "Vue.js",
           role: "Sole developer for entire project.",
