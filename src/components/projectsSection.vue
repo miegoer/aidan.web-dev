@@ -31,14 +31,27 @@
         <p><strong style="font-weight: bold;">Tech Stack:</strong> {{ projectText[activeProject].stack }}</p>
         <p><strong style="font-weight: bold;">Role:</strong> {{ projectText[activeProject].role }}</p>
         <div v-if="projectText[activeProject].media" class="media-container">
-          <div v-if="!imageLoaded[activeProject]" class="media-placeholder"></div>
+          <div v-if="!mediaLoaded[activeProject]" class="media-placeholder"></div>
+          
+          <!-- Dynamic media rendering -->
           <img 
+            v-if="isImage(projectText[activeProject].media)"
             :src="projectText[activeProject].media" 
             alt="Project media" 
             class="project-media" 
-            :class="{ 'hidden': !imageLoaded[activeProject] }"
-            @load="handleImageLoad(activeProject)"
+            :class="{ 'hidden': !mediaLoaded[activeProject] }"
+            @load="handleMediaLoad(activeProject)"
           />
+          <video 
+            v-else-if="isVideo(projectText[activeProject].media)"
+            :src="projectText[activeProject].media" 
+            class="project-media" 
+            :class="{ 'hidden': !mediaLoaded[activeProject] }"
+            @loadedmetadata="handleMediaLoad(activeProject)"
+            autoplay
+            loop
+            muted
+          ></video>
         </div>
       </div>
     </div>
@@ -52,7 +65,7 @@ export default {
   emits: ['show-project'],
   setup(props, { emit }) {
     const isVisible = ref(false)
-    const imageLoaded = ref({})
+    const mediaLoaded = ref({})
     let observer = null
 
     const handleIntersection = (entries) => {
@@ -81,7 +94,7 @@ export default {
 
     return {
       isVisible,
-      imageLoaded,
+      mediaLoaded,
     }
   },
   data() {
@@ -93,7 +106,7 @@ export default {
           description: "Trail Stops is an outdoor focused website, helping hikers plan their next big trip. Place stops to find nearby accommodation and see how far you'll walk each day.",
           stack: "React, Express, MongoDB, Leaflet Maps, Google Places API",
           role: "Sole developer for entire project.",
-          media: "/TrailStops.gif"
+          media: "/TrailStops.mp4"
         },
         Project2: {
           name: "AidanWebDev",
@@ -107,7 +120,7 @@ export default {
           description: "Urgig is an online platform focused on connecting artists and promoters. With promoters able to create events and find talent, and artists able to manage their bookings, Urgig is there to simplify the events industry.",
           stack: "Next.js, MongoDB Atlas, Tailwind, TalkJS, Clerk",
           role: "Responsible for the implementation of the messenger service with TalkJS, and booking functionality",
-          media: "/UrgigGIF.gif"
+          media: "/Urgig.mp4"
         },
         Project4: {
           name: "Scout Bingo",
@@ -125,11 +138,19 @@ export default {
     },
     showProject(project) {
       this.activeProject = project;
-      this.imageLoaded[project] = false;
+      this.mediaLoaded[project] = false;
     },
-    handleImageLoad(project) {
-      this.imageLoaded[project] = true;
+    handleMediaLoad(project) {
+      this.mediaLoaded[project] = true;
     },
+    isImage(filename) {
+      const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg'];
+      return imageExtensions.some(ext => filename.toLowerCase().endsWith(ext));
+    },
+    isVideo(filename) {
+      const videoExtensions = ['.mp4', '.webm', '.ogg', '.mov'];
+      return videoExtensions.some(ext => filename.toLowerCase().endsWith(ext));
+    }
   },
 }
 </script>
@@ -267,8 +288,10 @@ export default {
 
 .project-media {
   max-width: 90%;
+  max-height: 400px;
   border-radius: 12px;
   transition: opacity 0.3s ease;
+  object-fit: contain;
 }
 
 .project-media.hidden {
@@ -281,6 +304,14 @@ export default {
   align-items: center;
   text-align: center;
   width: 100%;
+}
+
+/* Hide video controls */
+video::-webkit-media-controls {
+  display: none !important;
+}
+video::-webkit-media-controls-enclosure {
+  display: none !important;
 }
 
 @keyframes pulse {
