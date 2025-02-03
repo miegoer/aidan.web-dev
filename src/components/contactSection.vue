@@ -192,7 +192,7 @@ export default {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 2vh;
+  gap: max(30px, 2vh);
 }
 
 .form-row {
@@ -218,6 +218,7 @@ export default {
   border-bottom: 2px solid rgba(0,0,0, 0.12);
   background: none;
   outline: none;
+  padding-bottom: 20px;
 }
 
 .input-data label {
@@ -237,7 +238,7 @@ export default {
 .input-data textarea {
   resize: none;
   height: 100%;
-  padding-top: 10px;
+
 }
 
 .form-heading {
@@ -254,7 +255,7 @@ export default {
   border-radius: 4px;
   cursor: pointer;
   transition: background 0.3s ease;
-  font-size: clamp(14px, 1.8vh, 16px);
+  font-size: clamp(14px, 1.8vh, 15px);
 }
 
 .form-row button[type="submit"]:hover {
@@ -290,13 +291,13 @@ export default {
 
 .input-data input:focus ~ label,
 .input-data input:valid ~ label {
-  transform: translateY(-20px);
+  transform: translateY(-30px);
   font-size: clamp(12px, 1.6vh, 14px);
 }
 
 .input-data textarea:focus ~ label,
 .input-data textarea:valid ~ label {
-  transform: translateY(-20px);
+  transform: translateY(-60px);
   font-size: clamp(12px, 1.6vh, 14px);
 }
 </style>
