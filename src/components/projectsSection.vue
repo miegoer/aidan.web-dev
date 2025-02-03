@@ -206,9 +206,18 @@ export default {
   border-radius: 8px;
   width: 80%;
   max-width: 1000px;
+  height: 80%;
+  max-height: 570px;
   text-align: center;
   position: relative;
   text-wrap: wrap;
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.popup::-webkit-scrollbar {
+  display: none;
 }
 
 .close-button {
